@@ -1,13 +1,14 @@
-import os
+from os import getenv
 
-import set_env
 from binance.client import Client
+from dotenv import load_dotenv, find_dotenv
 
 from send_email import send_email
 
 # init
-api_key = os.environ.get('binance_api')
-api_secret = os.environ.get('binance_secret')
+load_dotenv(find_dotenv())
+api_key = getenv('BINANCE_APIKEY')
+api_secret = getenv('BINANCE_SECRETKEY')
 
 client = Client(api_key, api_secret)
 
