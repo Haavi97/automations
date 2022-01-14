@@ -1,5 +1,13 @@
 import smtplib
-from personal_data import sender, receiver, pswd
+from dotenv import load_dotenv, find_dotenv
+from os import getenv
+
+
+# init
+load_dotenv(find_dotenv())
+sender = getenv('SENDER')
+receiver = getenv('RECEIVER')
+pswd = getenv('PSWD')
 
 
 def send_email(subject, body, email_to=receiver, add=''):

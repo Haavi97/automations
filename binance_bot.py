@@ -16,7 +16,9 @@ client = Client(api_key, api_secret)
 def asset_eur(asset):
     user_asset = client.get_asset_balance(asset=asset)
     asset_price = client.get_symbol_ticker(symbol=asset+'EUR')
-    user_asset_eur = float(user_asset['free'])*float(asset_price['price'])
+    print(user_asset)
+    user_asset_eur = float(user_asset['free'])*float(asset_price['price']) + float(
+        user_asset['locked'])*float(asset_price['price'])
     return user_asset_eur
 
 
@@ -27,6 +29,7 @@ def asset_email(asset):
         send_email(subject, body)
     except:
         print('Failed to send email')
+
 
 def total_holdings():
     account = client.get_account()
@@ -40,6 +43,7 @@ def total_holdings():
                 print('Could not convert asset: ' + current)
     return total
 
+
 def send_total_email():
     subject = 'Your total Binance holdings: ' + str(total_holdings()) + '€'
     body = subject
@@ -47,7 +51,6 @@ def send_total_email():
         send_email(subject, body)
     except:
         print('Failed to send email')
-
 
 
 if __name__ == '__main__':
