@@ -54,7 +54,12 @@ def send_total_email():
 
 
 if __name__ == '__main__':
-    send_total_email()
+    try:
+        send_total_email()
+    except:
+        subject = 'ERROR - Probably some Binance API error'
+        send_email(subject, subject)
+        print('Probably some Binance API error')
     # asset_email('BTC')
     # asset_email('ETH')
     # asset_email('ADA')
